@@ -18,7 +18,7 @@ class DeckTest {
     }
 
     @Test
-    @DisplayName("Deck을 새로 생성하면 52장의 카드가 존재한다.")
+    @DisplayName("Deck을 초기화하면 52장의 카드가 존재한다.")
     void createTest() {
         assertThat(deck.getDeck().size()).isEqualTo(52);
     }

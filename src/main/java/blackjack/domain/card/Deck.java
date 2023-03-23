@@ -12,24 +12,9 @@ public final class Deck {
     private final Deque<Card> deck;
 
     public Deck() {
-        List<Card> cards = init();
-        deck = new ConcurrentLinkedDeque<>(cards);
-    }
-
-    private List<Card> init() {
-        List<Card> cards = new ArrayList<>();
-        for (Denomination denomination : Denomination.values()) {
-            fillCards(denomination, cards);
-        }
+        List<Card> cards = Card.getDeck();
         shuffle(cards);
-
-        return cards;
-    }
-
-    private void fillCards(final Denomination denomination, final List<Card> cards) {
-        for (Suit suit : Suit.values()) {
-            cards.add(new Card(denomination, suit));
-        }
+        deck = new ConcurrentLinkedDeque<>(cards);
     }
 
     public Card drawCard() {

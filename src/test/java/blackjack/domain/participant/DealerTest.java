@@ -67,16 +67,16 @@ class DealerTest {
     @Test
     @DisplayName("한 장의 카드를 반환한다.")
     void showOneCardTest() {
-        dealer.receiveCard(new Card(ACE, HEART));
+        dealer.receiveCard(Card.of(ACE, HEART));
 
-        assertThat(dealer.showOneCard()).isEqualTo(new Card(ACE, HEART));
+        assertThat(dealer.showOneCard()).isEqualTo(Card.of(ACE, HEART));
     }
 
     @Test
     @DisplayName("16점 이하라면 16점 초과할 때까지 카드를 뽑는다.")
     void drawIfLowerOrEquals16() {
-        dealer.receiveCard(new Card(TWO, HEART));
-        dealer.receiveCard(new Card(TWO, SPADE));
+        dealer.receiveCard(Card.of(TWO, HEART));
+        dealer.receiveCard(Card.of(TWO, SPADE));
 
         dealer.drawIfLowerOrEquals16();
 

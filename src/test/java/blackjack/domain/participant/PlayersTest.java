@@ -57,7 +57,7 @@ class PlayersTest {
     @Test
     @DisplayName("플레이어의 수와 다른 갯수의 Hand를 받으면 예외가 발생한다.")
     void distributeHandsTest_different_size_exception() {
-        Hand hand = new Hand(List.of(new Card(ACE, HEART), new Card(TWO, SPADE)));
+        Hand hand = new Hand(List.of(Card.of(ACE, HEART), Card.of(TWO, SPADE)));
         List<Hand> hands = new ArrayList<>(List.of(hand));
 
         assertThatIllegalArgumentException().isThrownBy(
@@ -68,8 +68,8 @@ class PlayersTest {
     @Test
     @DisplayName("플레이어의 수에 일치한 Hands를 받으면 2장의 카드를 분배한다.")
     void distributeHandsTest() {
-        Hand hand1 = new Hand(List.of(new Card(ACE, HEART), new Card(TWO, SPADE)));
-        Hand hand2 = new Hand(List.of(new Card(ACE, HEART), new Card(TWO, SPADE)));
+        Hand hand1 = new Hand(List.of(Card.of(ACE, HEART), Card.of(TWO, SPADE)));
+        Hand hand2 = new Hand(List.of(Card.of(ACE, HEART), Card.of(TWO, SPADE)));
         List<Hand> hands = new ArrayList<>(List.of(hand1, hand2));
 
         assertThatNoException().isThrownBy(
@@ -81,17 +81,17 @@ class PlayersTest {
     @DisplayName("딜러가 블랙잭의 핸드를 가진 경우 compareTo를 테스트한다.")
     void compareHandToTest() {
         Dealer dealer = new Dealer();
-        dealer.receiveCard(new Card(K, HEART));
-        dealer.receiveCard(new Card(TEN, HEART));
-        dealer.receiveCard(new Card(TWO, HEART));
+        dealer.receiveCard(Card.of(K, HEART));
+        dealer.receiveCard(Card.of(TEN, HEART));
+        dealer.receiveCard(Card.of(TWO, HEART));
 
         Player player1 = playerData.get(0);
-        player1.receiveCard(new Card(TWO, DIAMOND));
-        player1.receiveCard(new Card(TWO, CLOVER));
+        player1.receiveCard(Card.of(TWO, DIAMOND));
+        player1.receiveCard(Card.of(TWO, CLOVER));
 
         Player player2 = playerData.get(1);
-        player2.receiveCard(new Card(TWO, DIAMOND));
-        player2.receiveCard(new Card(TWO, CLOVER));
+        player2.receiveCard(Card.of(TWO, DIAMOND));
+        player2.receiveCard(Card.of(TWO, CLOVER));
 
         Map<Player, Result> playersResult = players.compareHandTo(dealer.getHand());
 

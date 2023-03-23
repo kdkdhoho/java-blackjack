@@ -50,8 +50,8 @@ class BankTest {
     @DisplayName("블랙잭으로 이긴 경우 원금의 1.5배를 반환받는다.")
     void exchangeTest_blackjack() {
         player.receiveHand(new Hand(List.of(
-                new Card(ACE, HEART),
-                new Card(K, HEART)
+                Card.of(ACE, HEART),
+                Card.of(K, HEART)
         )));
 
         Bank newBank = bank.betMoney(player, money);
@@ -63,8 +63,8 @@ class BankTest {
     @DisplayName("이긴 경우 원금만큼 반환받는다.")
     void exchangeTest_win() {
         player.receiveHand(new Hand(List.of(
-                new Card(ACE, HEART),
-                new Card(NINE, HEART)
+                Card.of(ACE, HEART),
+                Card.of(NINE, HEART)
         )));
 
         Bank newBank = bank.betMoney(player, money);

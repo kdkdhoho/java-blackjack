@@ -26,7 +26,7 @@ class PlayerTest {
     @Test
     @DisplayName("Hand를 받는다.")
     void receiveHandTest() {
-        Hand hand = new Hand(List.of(new Card(ACE, HEART), new Card(TWO, SPADE)));
+        Hand hand = new Hand(List.of(Card.of(ACE, HEART), Card.of(TWO, SPADE)));
 
         player.receiveHand(hand);
 
@@ -36,7 +36,7 @@ class PlayerTest {
     @Test
     @DisplayName("블랙잭인지 확인한다.")
     void isBlackjackTest() {
-        Hand hand = new Hand(List.of(new Card(ACE, HEART), new Card(K, SPADE)));
+        Hand hand = new Hand(List.of(Card.of(ACE, HEART), Card.of(K, SPADE)));
 
         player.receiveHand(hand);
 
