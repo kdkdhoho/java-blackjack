@@ -1,9 +1,9 @@
 package mission;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -171,5 +171,43 @@ class SimpleArrayListTest {
         arrayList.clear();
 
         assertThat(arrayList.size()).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("배열을 받아 SimpleList로 변환한다")
+    void 배열을_받아_SimpleList로_변환한다() {
+        final String[] arrays = {"first", "second"};
+
+        final SimpleList<String> values = SimpleList.fromArrayToList(arrays);
+
+        assertAll(
+                () -> assertThat(values.get(0)).isEqualTo("first"),
+                () -> assertThat(values.get(1)).isEqualTo("second")
+        );
+    }
+
+    @Test
+    @DisplayName("빈 배열을 받아 SimpleList로 변환한다")
+    void 빈_배열을_받아_SimpleList로_변환한다() {
+        final Integer[] arrays = {};
+
+        final SimpleList<Integer> values = SimpleList.fromArrayToList(arrays);
+
+        assertThat(values.size()).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("숫자 타입의 SimpleList를 받아 총합을 더한다")
+    void 숫자_타입의_SimpleList를_받아_총합을_더한다() {
+        final SimpleList<Double> doubleValues = new SimpleArrayList<>(0.5, 0.7);
+        final SimpleList<Integer> intValues = new SimpleArrayList<>(1, 2);
+
+        final double doubleTotal = SimpleList.sum(doubleValues); // 1.2
+        final double intTotal = SimpleList.sum(intValues);  // 3
+
+        assertAll(
+                () -> assertThat(doubleTotal).isEqualTo(1.2),
+                () -> assertThat(intTotal).isEqualTo(3)
+        );
     }
 }

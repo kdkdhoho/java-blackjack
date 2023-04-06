@@ -4,17 +4,23 @@ public class SimpleArrayList<T> implements SimpleList<T> {
 
     private static final int DEFAULT_SIZE = 5;
 
-    private Object[] arrayList;
+    private T[] arrayList;
     private int size = 0;
 
     public SimpleArrayList() {
-        this.arrayList = new Object[DEFAULT_SIZE];
+        this.arrayList = (T[]) new Object[DEFAULT_SIZE];
+    }
+
+    @SafeVarargs
+    public SimpleArrayList(final T... values) {
+        this.arrayList = values;
+        size = values.length;
     }
 
     @Override
     public boolean add(final T value) {
         if (size == arrayList.length) {
-            Object[] newList = new Object[DEFAULT_SIZE + size];
+            T[] newList = (T[]) new Object[DEFAULT_SIZE + size];
             System.arraycopy(arrayList, 0, newList, 0, size);
             arrayList = newList;
         }
@@ -25,9 +31,9 @@ public class SimpleArrayList<T> implements SimpleList<T> {
     }
 
     @Override
-    public void add(int index, T value) {
+    public void add(final int index, final T value) {
         if (size >= arrayList.length) {
-            Object[] newList = new Object[DEFAULT_SIZE + size];
+            T[] newList = (T[]) new Object[DEFAULT_SIZE + size];
             System.arraycopy(arrayList, 0, newList, 0, size);
             newList[index] = value;
             arrayList = newList;
@@ -44,7 +50,7 @@ public class SimpleArrayList<T> implements SimpleList<T> {
     }
 
     @Override
-    public boolean contains(T value) {
+    public boolean contains(final T value) {
         for (int index = 0; index < size; index++) {
             if (arrayList[index].equals(value)) {
                 return true;
@@ -54,7 +60,7 @@ public class SimpleArrayList<T> implements SimpleList<T> {
     }
 
     @Override
-    public int indexOf(T value) {
+    public int indexOf(final T value) {
         for (int index = 0; index < size; index++) {
             if (arrayList[index].equals(value)) {
                 return index;
@@ -74,7 +80,7 @@ public class SimpleArrayList<T> implements SimpleList<T> {
     }
 
     @Override
-    public boolean remove(T value) {
+    public boolean remove(final T value) {
         if (contains(value)) {
             int index = indexOf(value);
             remove(index);
@@ -85,7 +91,7 @@ public class SimpleArrayList<T> implements SimpleList<T> {
     }
 
     @Override
-    public T remove(int index) {
+    public T remove(final int index) {
         T removeValue = get(index);
 
         for (int i = index; i < size - 1; i++) {
@@ -98,12 +104,12 @@ public class SimpleArrayList<T> implements SimpleList<T> {
 
     @Override
     public void clear() {
-        arrayList = new Object[DEFAULT_SIZE];
+        arrayList = (T[]) new Object[DEFAULT_SIZE];
         size = 0;
     }
 
     @Override
-    public T set(int index, T value) {
+    public T set(final int index, final T value) {
         validateIndex(index);
         arrayList[index] = value;
 
@@ -111,12 +117,12 @@ public class SimpleArrayList<T> implements SimpleList<T> {
     }
 
     @Override
-    public T get(int index) {
+    public T get(final int index) {
         validateIndex(index);
-        return (T) arrayList[index];
+        return arrayList[index];
     }
 
-    private void validateIndex(int index) {
+    private void validateIndex(final int index) {
         if (index >= size) {
             throw new IndexOutOfBoundsException("[ERROR] 인덱스가 범위를 벗어났습니다.");
         }
