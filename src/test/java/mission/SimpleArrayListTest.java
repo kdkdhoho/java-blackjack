@@ -227,4 +227,16 @@ class SimpleArrayListTest {
                 () -> assertThat(filteredIntValues.get(1)).isEqualTo(2)
         );
     }
+
+    @Test
+    @DisplayName("리스트의 값을 다른 리스트로 복사할 수 있다")
+    void 리스트의_값을_다른_리스트로_복사할_수_있다() {
+        LaserPrinter laserPrinter = new LaserPrinter();
+        SimpleList<Printer> printers = new SimpleArrayList<>();
+        SimpleList<LaserPrinter> laserPrinters = new SimpleArrayList<>(laserPrinter);
+
+        SimpleList.copy(laserPrinters, printers);
+
+        assertThat(printers.get(0) == laserPrinter).isTrue();
+    }
 }

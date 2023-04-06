@@ -28,6 +28,15 @@ public interface SimpleList<T> {
         return values;
     }
 
+    static <T> void copy(final SimpleList<T> source, final SimpleList<? super T> destination) {
+        destination.clear();
+
+        for (int i = 0; i < source.size(); i++) {
+            T value = source.get(i);
+            destination.add(value);
+        }
+    }
+
     boolean add(T value);
 
     void add(int index, T value);
