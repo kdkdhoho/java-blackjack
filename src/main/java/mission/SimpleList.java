@@ -8,7 +8,24 @@ public interface SimpleList<T> {
     }
 
     static <T extends Number> double sum(final SimpleList<T> values) {
-        return SimpleImmutableList.sum(values);
+        double result = 0.0;
+        for (int i = 0; i < values.size(); i++) {
+            result += values.get(i).doubleValue();
+        }
+
+        return result;
+    }
+
+    static <T extends Number> SimpleList<T> filterNegative(final SimpleList<T> values) {
+        for (int i = 0; i < values.size(); i++) {
+            double value = values.get(i).doubleValue();
+
+            if (value < 0) {
+                values.remove(i);
+            }
+        }
+
+        return values;
     }
 
     boolean add(T value);

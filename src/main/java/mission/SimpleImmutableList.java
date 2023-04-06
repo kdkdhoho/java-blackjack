@@ -95,7 +95,7 @@ public class SimpleImmutableList {
         return new SimpleListN<>(values);
     }
 
-    public static <T extends Number> double sum(final SimpleList<T> values) {
+    public static double sum(final SimpleList<? extends Number> values) {
         double result = 0.0;
         for (int i = 0; i < values.size(); i++) {
             result += values.get(i).doubleValue();

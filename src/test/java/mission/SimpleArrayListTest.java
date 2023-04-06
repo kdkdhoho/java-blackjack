@@ -210,4 +210,21 @@ class SimpleArrayListTest {
                 () -> assertThat(intTotal).isEqualTo(3)
         );
     }
+
+    @Test
+    @DisplayName("숫자 타입의 SimpleList를 받아 음수를 제외하고 반환한다")
+    void 숫자_타입의_SimpleList를_받아_음수를_제외하고_반환한다() {
+        final SimpleList<Double> doubleValues = new SimpleArrayList<>(-0.1, 0.5, 0.7);
+        final SimpleList<Integer> intValues = new SimpleArrayList<>(-10, 1, 2);
+
+        final SimpleList<Double> filteredDoubleValues = SimpleList.filterNegative(doubleValues);
+        final SimpleList<Integer> filteredIntValues = SimpleList.filterNegative(intValues);
+
+        assertAll(
+                () -> assertThat(filteredDoubleValues.get(0)).isEqualTo(0.5),
+                () -> assertThat(filteredDoubleValues.get(1)).isEqualTo(0.7),
+                () -> assertThat(filteredIntValues.get(0)).isEqualTo(1),
+                () -> assertThat(filteredIntValues.get(1)).isEqualTo(2)
+        );
+    }
 }
